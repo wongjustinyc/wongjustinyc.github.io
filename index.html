@@ -6,7 +6,7 @@
 
 <body>
     <h3>Click on a dot for more information about the article</h3>
-    <p>Visit <a href="https://www.thecrimson.com">link</a></p>
+    <h4>Double-click to reach article</h4>
     <script>
         width = 1000
         height = 500
@@ -47,11 +47,9 @@
 
         find_date = function(d) {
             console.log(d.group.charAt(19));
-            if (d.group.charAt(19) == "/") { return "Article title: " + d.id + " published on " + d.group.substring(9,19)};
-            if (d.group.charAt(18) == "/") { return "Article title: " + d.id + 
-                " published on " + d.group.substring(9,18)};
-            if (d.group.charAt(17) == "/") { return "Article title: " + d.id + 
-                " published on " + d.group.substring(9,17)};
+            if (d.group.charAt(19) == "/") { return " published on " + d.group.substring(9,19)};
+            if (d.group.charAt(18) == "/") { return " published on " + d.group.substring(9,18)};
+            if (d.group.charAt(17) == "/") { return " published on " + d.group.substring(9,17)};
         }
         
         d3.json("https://raw.githubusercontent.com/wongjustinyc/wongjustinyc.github.io/master/hyperlinks.json").then(function(data) {
@@ -105,18 +103,21 @@
             });
 
             svg.selectAll("circle")
-                .on("click", function(d, i) {
-                    var lastClicked = this;
+                .on("mouseover", function(d, i) {
                     d3.select("h3")
+                        .text("Article title: " + d.id);
+                    d3.select("h4")
                         .text(find_date(d));
-                    d3.select("a")
-                        .attr("xlink:href", "https://www.crimson.com" + d.group);
                     d3.select(this)
                         .transition()
                         .attr("r", 10);
-                    d3.select(lastClicked)
+                    d3.select(this)
                         .transition()
+                        .delay(500)
                         .attr("r", 5);
+                    // d3.select(lastClicked)
+                    //     .transition()
+                    //     .attr("r", 5);
                     
                 // .on("mouseover", function(d, i) {
                 //     d3.select(this)
@@ -133,6 +134,12 @@
                     //     .transition()
                     //     .text("Hover or click on a dot for more information about the article")
                     //     .delay(3000);
+                })
+                .on("dblclick", function(d) {
+                    window.open(
+                        'http://www.thecrimson.com' + d.group,
+                        '_blank' // <- This is what makes it open in a new window.
+                    )
                 });
 
             return svg.node();
