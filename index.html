@@ -6,7 +6,7 @@
 
 <body>
     <h3>Click on a dot for more information about the article</h3>
-    <p>Visit <a href="www.thecrimson.com">link</a></p>
+    <p>Visit <a href="https://www.thecrimson.com">link</a></p>
     <script>
         width = 1000
         height = 500
@@ -110,7 +110,7 @@
                     d3.select("h3")
                         .text(find_date(d));
                     d3.select("a")
-                        .attr("xlink:href", "http://www.crimson.com" + d.group);
+                        .attr("xlink:href", "https://www.crimson.com" + d.group);
                     d3.select(this)
                         .transition()
                         .attr("r", 10);
