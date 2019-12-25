@@ -6,7 +6,9 @@
 
 <body>
     <script>
-        d3.json("")
+        d3.json("hyperlinks.json").then(function(data) {
+            console.log(data);
+        })
     </script>
 </body>
 
