@@ -1,48 +1,14 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>D3 Trial</title>
-        <script src='http://d3js.org/d3.v3.min.js'></script>
-    </head>
+<meta charset="utf-8">
+<title>Force-Directed Graph</title>
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<body>
+<script type="module">
 
-    <body>
-        <p>This is a paragraph</p>
+import define from "./index.js";
+import {Runtime, Library, Inspector} from "./runtime.js";
 
-        <script>
-            var canvas = d3.select("body")
-                .append("svg")
-                .attr("width",500)
-                .attr('height',500)
-                .append('g')
+const runtime = new Runtime();
+const main = runtime.module(define, Inspector.into(document.body));
 
-            var data = [
-                        {x: 10, y: 30},
-                        {x: 10, y: 30},
-                        {x: 10, y: 30},
-            ];
-            
-            var line = d3.svg.line()
-                        .x(function(d) {return d.x})
-                        .y(function(d) {return d.y});
-
-            var bars = canvas.selectAll("path")
-                        .data([data])
-                        .enter()
-                        .append('path')
-                        .attr("d",line)
-                        .attr('stroke', "black")
-                        .attr("stroke-width", 10);
-            
-            
-            canvas.append('g')
-                .attr('transform','translate (0,400)')
-                .call(axis);
-
-            // var circle = canvas.append("circle")
-            //                 .attr("cx",100)
-            //                 .attr("cy",200)
-            //                 .attr("r", 30)
-            //                 .attr('fill',"blue");
-        </script>
-    </body>
-</html>
+</script>
