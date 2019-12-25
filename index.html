@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    <p>Click on a dot for more information about the article</p>
     <script>
         width = 1000
         height = 500
@@ -89,6 +90,41 @@
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y);
             });
+            svg.selectAll("circle")
+                .on("click", function (d, i) {
+                    console.log(d3.select(this))
+                })
+
+            var tim = 3;
+            svg.selectAll("circle")
+                .on("click", function(d, i) {
+                    console.log(d)
+                    var lastClicked = this;
+                    d3.select("p")
+                        .text("This is article " + d.id + " " + d.group[2]);
+                    d3.select(this)
+                        .transition()
+                        .attr("r", 10);
+                    d3.select(lastClicked)
+                        .transition()
+                        .attr("r", 5);
+                    
+                // .on("mouseover", function(d, i) {
+                //     d3.select(this)
+                //         .transition()
+                //         .attr("r", 10);
+                //     d3.select("p")
+                //         .transition()
+                //         .text("This is article " + d.id + ". For more information, click on the dot.");
+                //     d3.select(this)
+                //         .transition()
+                //         .attr("r", 5)
+                //         .delay(1000);
+                    // d3.select("p")
+                    //     .transition()
+                    //     .text("Hover or click on a dot for more information about the article")
+                    //     .delay(3000);
+                });
 
             return svg.node();
         })
