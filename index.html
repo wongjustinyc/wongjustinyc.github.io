@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>D3 Trial</title>
-        <script src='http://d3js.org/d3.v3.min.js'></script>
-    </head>
-    
-    <body>
-        <p>This is a paragraph</p>
+<meta charset="utf-8">
+<title>Force-Directed Graph</title>
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<body>
+<script type="module">
 
-        <script>
-        
-        </script>
-    </body>
-</html>
+import define from "./index.js";
+import {Runtime, Library, Inspector} from "./runtime.js";
+
+const runtime = new Runtime();
+const main = runtime.module(define, Inspector.into(document.body));
+
+</script>
